@@ -1,0 +1,7 @@
+[user]
+    name = YOUR_NAME
+    email = YOUR_EMAIL
+
+# Any GitHub repo with my username should be checked out r/w by default
+[url "git@github.com:YOUR_USERNAME/"]
+    insteadOf = "git://github.com/YOUR_USERNAME/"

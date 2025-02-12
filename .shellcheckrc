@@ -1,0 +1,19 @@
+# Set shell environment
+shell=zsh
+
+# Core rules to disable
+disable=SC1090  # Can't follow non-constant source - needed for dynamic sourcing in zsh
+disable=SC1091  # Can't follow non-constant source - needed for dynamic sourcing in zsh
+disable=SC2034  # Variables may appear unused but are used in sourced scripts/themes
+disable=SC2154  # Variable referenced but not assigned (needed for zinit, p10k, etc.)
+
+# Powerlevel10k specific disables
+disable=SC1073  # Couldn't parse explicit subshell (p10k syntax)
+disable=SC1072  # Expected end of subshell (p10k syntax)
+
+# Source path configuration
+source-path=SCRIPTDIR
+source-path=${HOME}/.dotfiles
+
+# Allow external sources
+external-sources=true

@@ -1,0 +1,33 @@
+name: Lint Shell Scripts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.sh"
+      - "**/*.bash"
+      - "**/*.zsh"
+      - ".shellcheckrc"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.sh"
+      - "**/*.bash"
+      - "**/*.zsh"
+      - ".shellcheckrc"
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "."
+          severity: warning
+          check_together: true
+          additional_files: "*.bash *.zsh"

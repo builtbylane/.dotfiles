@@ -1,0 +1,7 @@
+# AWS Vault aliases
+# alias dev="aws-vault exec YOUR-DEV-PROFILE && fnm use"
+# alias devl="aws-vault login YOUR-DEV-PROFILE"
+# alias u="unset AWS_VAULT && fnm use"
+
+# Node Auth Token
+# export NODE_AUTH_TOKEN=""

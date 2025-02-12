@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    # Look for `.github/workflows` files in the `default` branch
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "America/New_York"
+    reviewers:
+      - "repo-owner"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    open-pull-requests-limit: 10
+    versioning-strategy: auto
+    groups:
+      github-actions:
+        patterns:
+          - "*"
