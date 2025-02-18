@@ -14,10 +14,10 @@ A collection of dotfiles designed for a modern macOS development workflow. Featu
 - [`fd`](https://github.com/sharkdp/fd): User-friendly alternative to `find`
 - [`fzf`](https://github.com/junegunn/fzf): Fuzzy finder for files and history
 - [`zoxide`](https://github.com/ajeetdsouza/zoxide): Smarter directory navigation that learns from your habits
-- [`fnm`](https://github.com/Schniz/fnm): Fast Node.js version manager
 - [`delta`](https://github.com/dandavison/delta): Better Git diff viewing
 
 ### Development Tools
+- Automatic Node version switching with [`fnm`](https://github.com/Schniz/fnm)
 - System monitoring with [`btop`](https://github.com/aristocratos/btop)
 - HTTP requests with [`httpie`](https://github.com/httpie/httpie)
 - Directory visualization with [`tree`](http://mama.indstate.edu/users/ice/tree/)
@@ -47,7 +47,7 @@ The installation script will:
 2. Install [Homebrew](https://brew.sh) if not present
 3. Install required packages
 4. Set up [Zinit](https://github.com/zdharma-continuum/zinit) (Zsh plugin manager)
-5. Configure private settings
+5. Configure private settings (see below)
 
 ## 🔒 Private Configuration
 
@@ -63,8 +63,6 @@ Two private configuration files are created during installation:
    - Store Git credentials
    - Configure work-specific Git settings
    - Add private Git aliases
-
-These files are git-ignored by default for security.
 
 ## 🔧 Handy Git Functions
 
