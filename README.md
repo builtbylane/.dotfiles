@@ -16,7 +16,6 @@ A collection of dotfiles designed for a modern macOS development workflow. Featu
 - [`zoxide`](https://github.com/ajeetdsouza/zoxide): Smarter directory navigation that learns from your habits
 - [`fnm`](https://github.com/Schniz/fnm): Fast Node.js version manager
 - [`delta`](https://github.com/dandavison/delta): Better Git diff viewing
-- [`gh`](https://github.com/cli/cli): GitHub CLI tool
 
 ### Development Tools
 - System monitoring with [`btop`](https://github.com/aristocratos/btop)
@@ -115,7 +114,7 @@ Protected branches that won't be deleted: `main`, `master`, `develop`, `staging`
 .. # cd ..
 ... # cd ../..
 zi # Interactive zoxide navigation
-cff # cd to current Finder folder
+cdf # cd to current Finder folder
 ```
 
 ### Modern Tool Replacements
