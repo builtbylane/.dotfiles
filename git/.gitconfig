@@ -34,6 +34,12 @@ squash = "!git rebase -v -i $(git mainbranch)"
 # Pushes current branch to remote, using force-with-lease for safety force-with-lease prevents overwriting others' changes
 pub = push origin HEAD --force-with-lease
 
+# List branches sorted by last commit date (paginated with color)
+lb = "!git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) ~ %(contents:subject)' --color=always | delta --paging=always"
+
+# List all branches (including remote) sorted by last commit date (paginated with color)
+lba = "!git for-each-ref --sort=-committerdate refs/heads/ refs/remotes/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) - %(contents:subject)' --color=always | delta --paging=always"
+
 # Useful shortcuts
 ac = !git add -A && git commit -av
 ci = !git checkout $(git branch -a | fzf | xargs)

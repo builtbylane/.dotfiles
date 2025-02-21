@@ -81,12 +81,21 @@ gclonecd https://github.com/user/repo
 ### Branch Management
 
 ```bash
-# Cleanup merged branches (protects important branches)
-git cleanup
+# Cleanup merged branches (protects important branches) *
+gclean
 
 # Copy last commit message to clipboard
 cl
+
+# List local branches sorted by last commit date
+git lb
+
+# List all branches (including remote) sorted by last commit date
+git lba
 ```
+
+** Protected branches that won't be deleted: `main`, `master`, `develop`, `staging`, `prod`, `production`*
+
 
 ### Modern Git Workflow
 ```bash
