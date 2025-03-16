@@ -99,7 +99,7 @@ git lba
 
 ### Modern Git Workflow
 ```bash
-# Rebase current branch with latest main/master
+# Rebase current branch with the main branch
 git update
 
 # Rebase current branch with any remote changes on current branch
@@ -144,6 +144,7 @@ pr → pnpm run
 ```bash
 c → code .
 dot → code ~/.dotfiles
+serve → python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
 ## 🏗 Project Structure

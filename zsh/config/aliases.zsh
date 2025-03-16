@@ -48,6 +48,7 @@ alias dot="code ~/.dotfiles" # Edit dotfiles
 alias ip="curl -s https://api.ipify.org"
 alias ip6="curl -s https://api64.ipify.org"
 alias localip="ipconfig getifaddr en0"
+alias serve="python3 -m http.server 8000 --bind 127.0.0.1"
 
 # JSON/YAML tools
 alias pretty-json="jq '.'"
