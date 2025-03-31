@@ -23,6 +23,9 @@ A collection of dotfiles designed for a modern macOS development workflow. Featu
 - Directory visualization with [`tree`](http://mama.indstate.edu/users/ice/tree/)
 - Simplified man pages with [`tldr`](https://github.com/tldr-pages/tldr)
 
+### macOS Utilities
+- Wi-Fi password retrieval with wifi-password function (retrieves and copies saved network passwords)
+
 ### Shell Features
 - Fast shell startup with [Powerlevel10k](https://github.com/romkatv/powerlevel10k) instant prompt
 - Syntax highlighting
