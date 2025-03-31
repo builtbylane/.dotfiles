@@ -33,6 +33,7 @@ A collection of dotfiles designed for a modern macOS development workflow. Featu
 - Fuzzy completion
 - Rich command history
 - Directory jumping with zoxide
+- Built-in help system (`help` command) for quick reference to tools and aliases
 
 ## 📦 Installation
 
@@ -66,6 +67,21 @@ Two private configuration files are created during installation:
    - Store Git credentials
    - Configure work-specific Git settings
    - Add private Git aliases
+
+## 📚 Built-in Help System
+
+The dotfiles include an interactive help system to make it easier to remember available tools and shortcuts:
+
+```bash
+# Show all available categories
+help
+
+# Show specific category
+help git
+help navigation
+help tools
+help node
+help system
 
 ## 🔧 Handy Git Functions
 
