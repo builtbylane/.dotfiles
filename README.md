@@ -39,10 +39,11 @@ A collection of dotfiles designed for a modern macOS development workflow. Featu
 
 ```bash
 # Clone the repository
-git clone https://github.com/builtbylane/dotfiles.git ~/.dotfiles
+git clone git@github.com:builtbylane/dotfiles.git ~/.dotfiles
 
 # Run the installation script
 cd ~/.dotfiles
+chmod +x install.sh
 ./install.sh
 ```
 
