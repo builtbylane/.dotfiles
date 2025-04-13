@@ -29,7 +29,8 @@ function help() {
     printf "\033[1;33mgit lb\033[0m      - List local branches by date\n"
     printf "\033[1;33mgit lba\033[0m     - List all branches by date (including remote)\n"
     printf "\033[1;33mgit update\033[0m  - Rebase current branch with main branch\n"
-    printf "\033[1;33mgit squash\033[0m  - Interactive rebase for squashing commits\n"
+    printf "\033[1;33mgit squash\033[0m  - Rebase for squashing commits\n"
+    printf "\033[1;33mgit si\033[0m      - Interactive rebase for squashing commits\n"
     printf "\033[1;33mgit pub\033[0m     - Push with force-with-lease safety\n"
   }
 

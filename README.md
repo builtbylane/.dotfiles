@@ -127,6 +127,7 @@ git update-branch
 
 # Squash commits for clean history
 git squash
+git si # or git squash-interactive
 
 # Push with force-with-lease safety
 git pub

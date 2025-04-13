@@ -29,7 +29,11 @@ update = "!git pull origin $(git mainbranch) --rebase"
 update-branch = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
 
 # Starts an interactive rebase against the main branch. Allows you to squash/edit/reword commits
-squash = "!git rebase -v -i $(git mainbranch)"
+squash-interactive = "!git rebase -v -i $(git mainbranch)"
+si = "!git squash-interactive"
+
+# Squash all commits on the current branch into a single commit (using reset --soft)
+squash = "!f() { target=${1:-$(git mainbranch)}; current=$(git rev-parse --abbrev-ref HEAD); if [ \"$current\" = \"$target\" ]; then echo \"Error: You're on $target branch. Checkout a feature branch first.\"; return 1; fi; echo \"Squashing all commits against $target into one commit\"; git reset --soft $(git merge-base $target $current) && git commit --edit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; }; f"
 
 # Pushes current branch to remote, using force-with-lease for safety force-with-lease prevents overwriting others' changes
 pub = push origin HEAD --force-with-lease
