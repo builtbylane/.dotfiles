@@ -89,23 +89,25 @@ help system
 ### Quick Repository Navigation
 ```bash
 # Open current GitHub repository in browser
-gopen
+git open
 
 # Open current branch's PR page
-gpr
+git pr
 
 # Clone and CD in one command
-gclonecd https://github.com/user/repo
+git clone-cd https://github.com/user/repo
 ```
 
 ### Branch Management
 
 ```bash
 # Cleanup merged branches (protects important branches) *
-gclean
+git cleanup
 
 # Copy last commit message to clipboard
-cl
+git copy-last
+# or short alias
+git cl
 
 # List local branches sorted by last commit date
 git lb

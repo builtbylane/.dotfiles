@@ -14,9 +14,6 @@ alias cat="bat"
 alias find="fd"
 alias grep="rg"
 
-# Function aliases
-alias cl=copy_last_commit_message_to_clipboard
-
 # Enhanced zoxide aliases and functions (see zsh/functions/navigation.zsh for more)
 alias za="zoxide add"    # Add directory
 alias zr="zoxide remove" # Remove directory
@@ -26,10 +23,6 @@ alias c="code ."
 
 # Git
 alias g="git"
-alias gopen='git_open_repo'
-alias gpr='git_open_pr'
-alias gclonecd='git_clone_cd'
-alias gclean='cleanup_branches'
 
 # Node.js
 alias ts='tsx --env-file=.env'
