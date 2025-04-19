@@ -177,12 +177,16 @@ serve → python3 -m http.server 8000 --bind 127.0.0.1
 ├── Brewfile            # Homebrew dependencies
 ├── .zshrc              # Main shell configuration
 ├── zsh/
-│   ├── aliases.zsh     # Command aliases
-│   ├── options.zsh     # Shell options
-│   ├── paths.zsh       # PATH configuration
+│   ├── config/
+│   │   ├── aliases.zsh  # Command aliases
+│   │   ├── options.zsh  # Shell options
+│   │   └── paths.zsh    # PATH configuration
 │   └── functions/
-│       ├── git.zsh     # Git utilities
-│       └── navigation.zsh # Navigation helpers
+│       ├── autoupdate.zsh  # Auto-update functionality
+│       ├── git.zsh         # Git utilities
+│       ├── help.zsh        # Help system
+│       ├── navigation.zsh  # Navigation helpers
+│       └── utilities.zsh   # Utility functions
 ├── git/
 │   ├── .gitconfig      # Git configuration
 │   └── .gitignore      # Global gitignore
@@ -193,6 +197,7 @@ serve → python3 -m http.server 8000 --bind 127.0.0.1
 
 ## 🔄 Updating
 
+### Manual Update
 ```bash
 # Pull latest changes
 cd ~/.dotfiles
@@ -200,6 +205,17 @@ git pull
 
 # Re-run installation script
 ./install.sh
+```
+
+### Automatic Updates
+The dotfiles include an auto-update system that:
+- Automatically checks for updates once per day when you open a terminal
+- Notifies you when updates are available with a friendly message
+- Lets you choose whether to update immediately or later
+
+You can also manually check for updates anytime with:
+```bash
+update-dotfiles
 ```
 
 The installation script is idempotent and can be run multiple times safely.
