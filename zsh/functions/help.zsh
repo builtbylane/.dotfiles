@@ -86,6 +86,7 @@ function help() {
     printf "\033[1;33mwifi-password\033[0m - Get password for current/specified WiFi network\n"
     printf "\033[1;33mip/ip6\033[0m      - Show public IP addresses\n"
     printf "\033[1;33mlocalip\033[0m     - Show local IP address\n"
+    printf "\033[1;33mupdate-dotfiles\033[0m - Check for and apply dotfiles updates\n"
   }
 
   show_usage() {
