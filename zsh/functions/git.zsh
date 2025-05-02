@@ -67,9 +67,21 @@ function git_open_pr() {
     target_branch="main"
   fi
 
-  pr_url="${remote_url}/compare/${target_branch}?expand=1"
+  # Try to get existing PR number
+  if command -v gh &>/dev/null; then
+    pr_number=$(gh pr view --json number -q .number 2>/dev/null)
+    if [[ -n "$pr_number" ]]; then
+      pr_url="${remote_url}/pull/${pr_number}"
+      open "$pr_url"
+      echo -e "\033[32m✓ Opening existing PR #${pr_number}:\033[0m \033[36m$pr_url\033[0m"
+      return 0
+    fi
+  fi
+
+  # Fall back to PR creation page
+  pr_url="${remote_url}/compare/${current_branch}?expand=1"
   open "$pr_url"
-  echo -e "\033[32m✓ Opening PR:\033[0m \033[36m$pr_url\033[0m"
+  echo -e "\033[32m✓ Opening PR creation page:\033[0m \033[36m$pr_url\033[0m"
 }
 
 PROTECTED_BRANCHES=(
