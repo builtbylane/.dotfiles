@@ -1,7 +1,7 @@
 wifi-password() {
   # Check if running on macOS
   if [[ "$(uname)" != "Darwin" ]]; then
-    echo "Error: This function only works on macOS."
+    print -P "%F{red}Error:%f This function only works on macOS."
     return 1
   fi
 
@@ -9,7 +9,7 @@ wifi-password() {
 
   # Method 1: Try using newer /usr/sbin/airport command (available on M1 Macs)
   if [ -z "$ssid" ]; then
-    echo "Trying to detect current Wi-Fi network..."
+    print -P "%F{blue}Detecting current Wi-Fi network...%f"
     if [ -x "/usr/sbin/airport" ]; then
       ssid=$(/usr/sbin/airport -I | awk '/ SSID/ {print substr($0, index($0, $2))}')
     else
@@ -20,7 +20,6 @@ wifi-password() {
 
   # Method 2: Try using networksetup with more reliable parsing
   if [ -z "$ssid" ]; then
-    echo "Trying alternative detection method..."
     local wifi_device
     wifi_device=$(networksetup -listallhardwareports | awk '/Wi-Fi|AirPort/{getline; print $2}')
     if [ -n "$wifi_device" ]; then
@@ -30,25 +29,28 @@ wifi-password() {
 
   # Method 3: Try using defaults command to read Wi-Fi preferences
   if [ -z "$ssid" ]; then
-    echo "Trying system preferences detection..."
     ssid=$(defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences 2>/dev/null | grep -A 1 "LastConnected" | grep "SSIDString" | cut -d '"' -f 2)
   fi
 
   # If automatic detection failed, prompt for manual input
   if [ -z "$ssid" ]; then
-    echo "Could not automatically detect a valid Wi-Fi network."
-    read -r "ssid?Enter the Wi-Fi network name (SSID): "
+    print -P "%F{yellow}Could not automatically detect a valid Wi-Fi network.%f"
+    print -nP "%F{blue}Enter the Wi-Fi network name (SSID):%f "
+    read -r ssid
   else
     # Before confirming, validate that it's not an error message
     if [[ "$ssid" == *"not associated"* || "$ssid" == *"No network"* ]]; then
-      echo "You don't appear to be connected to a Wi-Fi network."
-      read -r "ssid?Enter the Wi-Fi network name (SSID): "
+      print -P "%F{yellow}You don't appear to be connected to a Wi-Fi network.%f"
+      print -nP "%F{blue}Enter the Wi-Fi network name (SSID):%f "
+      read -r ssid
     else
-      echo "Detected Wi-Fi network: $ssid"
+      print -P "%F{green}Detected Wi-Fi network:%f %F{blue}$ssid%f"
       # Confirm the detected network or allow changing it
-      read -r "confirm?Is this the correct network? [Y/n] (or enter a different network name): "
+      print -nP "%F{blue}Is this the correct network? [Y/n] (or enter a different network name):%f "
+      read -r confirm
       if [[ "$confirm" =~ ^[Nn].* ]]; then
-        read -r "ssid?Enter the Wi-Fi network name (SSID): "
+        print -nP "%F{blue}Enter the Wi-Fi network name (SSID):%f "
+        read -r ssid
       elif [[ -n "$confirm" && "$confirm" != "Y" && "$confirm" != "y" ]]; then
         # User entered a different network name
         ssid="$confirm"
@@ -57,11 +59,11 @@ wifi-password() {
   fi
 
   if [ -z "$ssid" ]; then
-    echo "No SSID provided. Exiting."
+    print -P "%F{red}No SSID provided. Exiting.%f"
     return 1
   fi
 
-  echo "Looking up password for network: $ssid"
+  print -P "\n%F{blue}Looking up password for network:%f %F{blue}$ssid%f"
 
   # Try to get the password from Keychain
   local password
@@ -73,16 +75,16 @@ wifi-password() {
   fi
 
   if [ -z "$password" ]; then
-    echo "Could not find saved password for \"$ssid\"."
-    echo "Possible reasons:"
-    echo "  - Password not saved in Keychain"
-    echo "  - Network uses enterprise authentication"
-    echo "  - Network name was misspelled"
+    print -P "\n%F{red}Could not find saved password for \"$ssid\".%f"
+    print -P "%F{yellow}Possible reasons:%f"
+    print -P "  - Password not saved in Keychain"
+    print -P "  - Network uses enterprise authentication"
+    print -P "  - Network name was misspelled"
     return 1
   else
     # Copy password to clipboard
     echo -n "$password" | pbcopy
-    echo "Password: $password"
-    echo "✓ Password copied to clipboard"
+    print -P "\n%F{green}Password:%f $password"
+    print -P "%F{green}Password copied to clipboard%f"
   fi
 }

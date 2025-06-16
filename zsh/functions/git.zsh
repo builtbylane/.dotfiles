@@ -97,10 +97,28 @@ PROTECTED_BRANCHES=(
 )
 
 get_merged_branches() {
-  local protected_pattern
-  protected_pattern=$(printf "|%s" "${PROTECTED_BRANCHES[@]}")
-  protected_pattern="\\*${protected_pattern}"
-  git branch --merged | grep -v "${protected_pattern}" | tr -d ' '
+  local branches
+  branches=$(git branch --merged)
+  
+  # Filter out protected branches and current branch
+  while IFS= read -r branch; do
+    # Remove leading whitespace and asterisk
+    branch=$(echo "$branch" | sed 's/^[[:space:]]*\**//' | tr -d ' ')
+    
+    # Skip empty lines
+    [[ -z "$branch" ]] && continue
+    
+    # Skip if it's a protected branch
+    local is_protected=0
+    for protected in "${PROTECTED_BRANCHES[@]}"; do
+      if [[ "$branch" == "$protected" ]]; then
+        is_protected=1
+        break
+      fi
+    done
+    
+    [[ $is_protected -eq 0 ]] && echo "$branch"
+  done <<< "$branches"
 }
 
 cleanup_branches() {

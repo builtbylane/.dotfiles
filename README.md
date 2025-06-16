@@ -101,7 +101,8 @@ git clone-cd https://github.com/user/repo
 ### Branch Management
 
 ```bash
-# Cleanup merged branches (protects important branches) *
+# Cleanup merged branches (protects important branches)
+# Protected branches that won't be deleted: `main`, `master`, `develop`, `staging`, `prod`, `production`*
 git cleanup
 
 # Copy last commit message to clipboard
@@ -115,9 +116,6 @@ git lb
 # List all branches (including remote) sorted by last commit date
 git lba
 ```
-
-** Protected branches that won't be deleted: `main`, `master`, `develop`, `staging`, `prod`, `production`*
-
 
 ### Modern Git Workflow
 ```bash
@@ -135,7 +133,6 @@ git si # or git squash-interactive
 git pub
 ```
 
-Protected branches that won't be deleted: `main`, `master`, `develop`, `staging`, `prod`, `production`
 
 ## ⚡️ Shell Aliases
 
