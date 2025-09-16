@@ -1,123 +1,123 @@
 [include]
-path = ~/.gitconfig.private
+	path = ~/.gitconfig.private
 
 [core]
-excludesfile = ~/.gitignore
-editor = "code --wait"
-pager = delta
+	excludesfile = ~/.gitignore
+	editor = "code --wait"
+	pager = delta
 
 [init]
-defaultBranch = main
+	defaultBranch = main
 
 [alias]
-# Status shortcuts
-s = status -s
+	# Status shortcuts
+	s = status -s
 
-main = "!git checkout $(git mainbranch)"
+	main = "!git checkout $(git mainbranch)"
 
-# Repository navigation and PR workflow
-open = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_repo'
-pr = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_pr'
-clone-cd = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_clone_cd'
-cleanup = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && cleanup_branches'
-copy-last = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'
-cl = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'
+	# Repository navigation and PR workflow
+	open = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_repo'
+	pr = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_pr'
+	clone-cd = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_clone_cd'
+	cleanup = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && cleanup_branches'
+	copy-last = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'
+	cl = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'
 
-# Logging
-l = log --format='%Cgreen%h%Creset %C(cyan)%an%Creset - %s' --graph
-lqs = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	# Logging
+	l = log --format='%Cgreen%h%Creset %C(cyan)%an%Creset - %s' --graph
+	lqs = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
-# Modern rebase workflow
-mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p' || echo main"
+	# Modern rebase workflow
+	mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p' || echo main"
 
-# Pulls and rebases changes from the main branch.
-update = "!git pull origin $(git mainbranch) --rebase"
+	# Pulls and rebases changes from the main branch.
+	update = "!git pull origin $(git mainbranch) --rebase"
 
-# Pulls and rebases changes from the remote version of your current branch
-update-branch = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
+	# Pulls and rebases changes from the remote version of your current branch
+	update-branch = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
 
-# Starts an interactive rebase against the main branch. Allows you to squash/edit/reword commits
-squash-interactive = "!git rebase -v -i $(git mainbranch)"
-si = "!git squash-interactive"
+	# Starts an interactive rebase against the main branch. Allows you to squash/edit/reword commits
+	squash-interactive = "!git rebase -v -i $(git mainbranch)"
+	si = "!git squash-interactive"
 
-# Squash all commits on the current branch into a single commit (using reset --soft)
-squash = "!f() { target=${1:-$(git mainbranch)}; current=$(git rev-parse --abbrev-ref HEAD); if [ \"$current\" = \"$target\" ]; then echo \"Error: You're on $target branch. Checkout a feature branch first.\"; return 1; fi; echo \"Squashing all commits against $target into one commit\"; git reset --soft $(git merge-base $target $current) && git commit --edit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; }; f"
+	# Squash all commits on the current branch into a single commit (using reset --soft)
+	squash = "!f() { target=${1:-$(git mainbranch)}; current=$(git rev-parse --abbrev-ref HEAD); if [ \"$current\" = \"$target\" ]; then echo \"Error: You're on $target branch. Checkout a feature branch first.\"; return 1; fi; echo \"Squashing all commits against $target into one commit\"; git reset --soft $(git merge-base $target $current) && git commit --edit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; }; f"
 
-# Pushes current branch to remote, using force-with-lease for safety force-with-lease prevents overwriting others' changes
-pub = push origin HEAD --force-with-lease
+	# Pushes current branch to remote, using force-with-lease for safety force-with-lease prevents overwriting others' changes
+	pub = push origin HEAD --force-with-lease
 
-# List branches sorted by last commit date (paginated with color)
-lb = "!git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) ~ %(contents:subject)' --color=always | delta --paging=always"
+	# List branches sorted by last commit date (paginated with color)
+	lb = "!git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) ~ %(contents:subject)' --color=always | delta --paging=always"
 
-# List all branches (including remote) sorted by last commit date (paginated with color)
-lba = "!git for-each-ref --sort=-committerdate refs/heads/ refs/remotes/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) - %(contents:subject)' --color=always | delta --paging=always"
+	# List all branches (including remote) sorted by last commit date (paginated with color)
+	lba = "!git for-each-ref --sort=-committerdate refs/heads/ refs/remotes/ --format='%(color:yellow)%(committerdate:short)%(color:reset) %(color:green)%(refname:short)%(color:reset) - %(contents:subject)' --color=always | delta --paging=always"
 
-# Useful shortcuts
-ac = !git add -A && git commit -av
-ci = !git checkout $(git branch -a | fzf | xargs)
-fix = "!f() { code $(git diff --name-only); }; f"
+	# Useful shortcuts
+	ac = !git add -A && git commit -av
+	ci = !git checkout $(git branch -a | fzf | xargs)
+	fix = "!f() { code $(git diff --name-only); }; f"
 
-# Reset commands
-undo = reset --soft HEAD^
+	# Reset commands
+	undo = reset --soft HEAD^
 
 [delta]
-# Navigation and UI settings
-navigate = true # Use n and N to move between diff sections
-light = false   # Set to true if you're in a terminal with a light background color
-features = decorations
-side-by-side = true            # Show diffs side by side
-line-numbers = true            # Show line numbers
-syntax-theme = Nord            # Use Nord color theme
-wrap-max-lines = unlimited     # Prevent truncating long lines
-keep-plus-minus-markers = true # Keep the +/- at start of lines
+	# Navigation and UI settings
+	navigate = true # Use n and N to move between diff sections
+	light = false   # Set to true if you're in a terminal with a light background color
+	features = decorations
+	side-by-side = true            # Show diffs side by side
+	line-numbers = true            # Show line numbers
+	syntax-theme = Nord            # Use Nord color theme
+	wrap-max-lines = unlimited     # Prevent truncating long lines
+	keep-plus-minus-markers = true # Keep the +/- at start of lines
 
 [delta "decorations"]
-# Styling for different elements in the diff
-commit-decoration-style = blue ol
-commit-style = raw
-file-style = omit
-hunk-header-decoration-style = blue box
-hunk-header-file-style = red
-hunk-header-line-number-style = "#067a00"
-hunk-header-style = file line-number syntax
+	# Styling for different elements in the diff
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	hunk-header-style = file line-number syntax
 
 [diff]
-tool = vscode
-colorMoved = default # Show moved lines differently
+	tool = vscode
+	colorMoved = default # Show moved lines differently
 
 [difftool "vscode"]
-cmd = code --wait --diff $LOCAL $REMOTE
+	cmd = code --wait --diff $LOCAL $REMOTE
 
 [interactive]
-diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [merge]
-conflictstyle = diff3 # Show three-way diff for merge conflicts
+	conflictstyle = diff3 # Show three-way diff for merge conflicts
 
 [color]
-ui = auto # Enable automatic color output
+	ui = auto # Enable automatic color output
 
 [push]
-default = current      # Push current branch to same-named upstream branch
-autoSetupRemote = true # Automatically set up remote branch on first push
+	default = current      # Push current branch to same-named upstream branch
+	autoSetupRemote = true # Automatically set up remote branch on first push
 
 [pull]
-rebase = true # Use rebase instead of merge when pulling
+	rebase = true # Use rebase instead of merge when pulling
 
 [fetch]
-prune = true # Remove remote-tracking branches that no longer exist on remote
+	prune = true # Remove remote-tracking branches that no longer exist on remote
 
 [url "git@github.com:"]
-insteadOf = https://github.com/
+	insteadOf = https://github.com/
 
 [help]
-autocorrect = 1 # Automatically correct and execute mistyped commands
+	autocorrect = 1 # Automatically correct and execute mistyped commands
 
 [credential]
-helper = osxkeychain # Use macOS keychain for credential storage
+	helper = osxkeychain # Use macOS keychain for credential storage
 
 [filter "lfs"]
-clean = git-lfs clean -- %f
-smudge = git-lfs smudge -- %f
-required = true
-process = git-lfs filter-process
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
