@@ -31,7 +31,8 @@ function git_open_repo() {
     return 1
   fi
 
-  web_url=$(echo "$remote_url" | sed -e 's|git@github.com:|https://github.com/|' -e 's/\.git$//')
+  # Handle custom GitHub host aliases (e.g., github-*)
+  web_url=$(echo "$remote_url" | sed -e 's|git@github[^:]*:|https://github.com/|' -e 's/\.git$//')
   open "$web_url"
   echo -e "\033[32m✓ Opening:\033[0m \033[36m$web_url\033[0m"
 }
@@ -56,8 +57,9 @@ function git_open_pr() {
     return 1
   fi
 
-  if [[ $remote_url =~ ^git@ ]]; then
-    remote_url=${remote_url/git@github.com:/https://github.com/}
+  # Handle custom GitHub host aliases (e.g., github-*)
+  if [[ $remote_url =~ ^git@github ]]; then
+    remote_url=$(echo "$remote_url" | sed 's|git@github[^:]*:|https://github.com/|')
   fi
 
   remote_url=${remote_url%.git}
@@ -99,15 +101,15 @@ PROTECTED_BRANCHES=(
 get_merged_branches() {
   local branches
   branches=$(git branch --merged)
-  
+
   # Filter out protected branches and current branch
   while IFS= read -r branch; do
     # Remove leading whitespace and asterisk
     branch=$(echo "$branch" | sed 's/^[[:space:]]*\**//' | tr -d ' ')
-    
+
     # Skip empty lines
     [[ -z "$branch" ]] && continue
-    
+
     # Skip if it's a protected branch
     local is_protected=0
     for protected in "${PROTECTED_BRANCHES[@]}"; do
@@ -116,7 +118,7 @@ get_merged_branches() {
         break
       fi
     done
-    
+
     [[ $is_protected -eq 0 ]] && echo "$branch"
   done <<< "$branches"
 }
