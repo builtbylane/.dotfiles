@@ -32,6 +32,7 @@ alias r="npm run"
 alias yr="yarn run"
 alias br="bun run"
 alias pr="pnpm run"
+alias pd="pnpm run dev"
 
 # System
 alias reload='RELOAD_DIR="$PWD"; exec zsh -l'
