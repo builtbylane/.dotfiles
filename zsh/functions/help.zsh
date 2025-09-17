@@ -18,9 +18,9 @@ function help() {
   # Git helpers
   show_git_help() {
     print_header "Git Helpers"
-    printf "\033[1;33mg open\033[0m      - Open current GitHub repository in browser\n"
-    printf "\033[1;33mg pr\033[0m        - Open current branch's PR page\n"
-    printf "\033[1;33mg clone-cd\033[0m  - Clone and cd into repo: git clone-cd https://github.com/user/repo\n"
+    printf "\033[1;33mg open\033[0m      - Open current GitHub repository in browser (works with custom SSH aliases)\n"
+    printf "\033[1;33mg pr\033[0m        - Open current branch's PR page or create new PR\n"
+    printf "\033[1;33mgcd\033[0m         - Clone and cd into repo: gcd git@github.com:user/repo\n"
     printf "\033[1;33mg cleanup\033[0m   - Cleanup merged branches (protects important branches)\n"
     printf "\033[1;33mg copy-last\033[0m - Copy last commit message to clipboard\n"
     printf "\033[1;33mg cl\033[0m        - Short alias for copy-last\n"
@@ -29,8 +29,10 @@ function help() {
     printf "\033[1;33mg lb\033[0m        - List local branches by date\n"
     printf "\033[1;33mg lba\033[0m       - List all branches by date (including remote)\n"
     printf "\033[1;33mg update\033[0m    - Rebase current branch with main branch\n"
-    printf "\033[1;33mg squash\033[0m    - Rebase for squashing commits\n"
+    printf "\033[1;33mg update-branch\033[0m - Rebase current branch with remote version of current branch\n"
+    printf "\033[1;33mg squash\033[0m    - Squash all commits on current branch into one\n"
     printf "\033[1;33mg si\033[0m        - Interactive rebase for squashing commits\n"
+    printf "\033[1;33mg main\033[0m      - Checkout the main/master branch\n"
     printf "\033[1;33mg pub\033[0m       - Push with force-with-lease safety\n"
   }
 
@@ -74,12 +76,14 @@ function help() {
     printf "\033[1;33myr\033[0m          - Run yarn scripts: yr start\n"
     printf "\033[1;33mbr\033[0m          - Run bun scripts: br dev\n"
     printf "\033[1;33mpr\033[0m          - Run pnpm scripts: pr build\n"
-    printf "\033[1;33mts\033[0m          - Run TypeScript with tsx: ts script.ts\n"
+    printf "\033[1;33mpd\033[0m          - Run pnpm dev: pd\n"
+    printf "\033[1;33mts\033[0m          - Run TypeScript with tsx and .env: ts script.ts\n"
   }
 
   # System utilities
   show_system_help() {
     print_header "System Utilities"
+    printf "\033[1;33mc\033[0m           - Open current directory in VS Code\n"
     printf "\033[1;33mdot\033[0m         - Open dotfiles in VS Code\n"
     printf "\033[1;33mreload\033[0m      - Reload shell configuration\n"
     printf "\033[1;33mserve\033[0m       - Start a simple HTTP server in current directory\n"
@@ -87,6 +91,8 @@ function help() {
     printf "\033[1;33mip/ip6\033[0m      - Show public IP addresses\n"
     printf "\033[1;33mlocalip\033[0m     - Show local IP address\n"
     printf "\033[1;33mupdate-dotfiles\033[0m - Check for and apply dotfiles updates\n"
+    printf "\033[1;33mpretty-json\033[0m - Format JSON with jq\n"
+    printf "\033[1;33mpretty-yaml\033[0m - Format YAML with yq\n"
   }
 
   show_usage() {

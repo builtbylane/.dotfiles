@@ -23,6 +23,7 @@ alias c="code ."
 
 # Git
 alias g="git"
+alias gcd="git_clone_cd"  # Clone and cd into repo
 
 # Node.js
 alias ts='tsx --env-file=.env'

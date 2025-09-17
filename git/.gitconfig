@@ -18,7 +18,6 @@
 	# Repository navigation and PR workflow
 	open = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_repo'
 	pr = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_open_pr'
-	clone-cd = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && git_clone_cd'
 	cleanup = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && cleanup_branches'
 	copy-last = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'
 	cl = !zsh -c 'source ~/.dotfiles/zsh/functions/git.zsh && copy_last_commit_message_to_clipboard'

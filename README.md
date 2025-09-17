@@ -91,11 +91,13 @@ help system
 # Open current GitHub repository in browser
 git open
 
-# Open current branch's PR page
+# Open current branch's PR page or create new PR
 git pr
 
 # Clone and CD in one command
-git clone-cd https://github.com/user/repo
+gcd https://github.com/user/repo
+# or
+git_clone_cd git@github.com:user/repo
 ```
 
 ### Branch Management
@@ -158,13 +160,16 @@ r → npm run
 yr → yarn run
 br → bun run
 pr → pnpm run
+pd → pnpm run dev
 ```
 
 ### Development
 ```bash
 c → code .
 dot → code ~/.dotfiles
+gcd → git_clone_cd (clone repo and cd into it)
 serve → python3 -m http.server 8000 --bind 127.0.0.1
+ts → tsx --env-file=.env
 ```
 
 ## 🏗 Project Structure
