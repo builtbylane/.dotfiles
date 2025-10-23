@@ -5,9 +5,9 @@ alias ....="cd ../../.."
 alias ~="cd ~"
 
 # Modern replacement tools
-alias ls="eza --icons --hyperlink --git --git-repos --header"
-alias l="eza -l --icons --hyperlink --git --git-repos --header"
-alias la="eza -la --icons --hyperlink --git --git-repos --header"
+alias ls="eza --icons --hyperlink --git-repos --git --header"
+alias l="eza -l --icons --hyperlink --git-repos --git --header"
+alias la="eza -la --icons --hyperlink --git-repos --git --header"
 alias lt="eza --tree --level=2 --icons"  # Tree view, 2 levels deep
 alias ltt="eza --tree --level=3 --icons" # Tree view, 3 levels deep
 alias cat="bat"
